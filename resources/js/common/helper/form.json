@@ -1,0 +1,48 @@
+{
+    "options": {
+        "size": [
+            {
+                "value": "m",
+                "label": "M"
+            },
+            {
+                "value": "s",
+                "label": "S"
+            },
+            {
+                "value": "l",
+                "label": "L"
+            },
+            {
+                "value": "sl",
+                "label": "SL"
+            },
+            {
+                "value": "xl",
+                "label": "XL"
+            }
+        ],
+        "color": [
+            {
+                "value": "#000000",
+                "label": "Black"
+            },
+            {
+                "value": "#dddddd",
+                "label": "White"
+            },
+            {
+                "value": "#FF0000",
+                "label": "Red"
+            },
+            {
+                "value": "#008000",
+                "label": "Green"
+            },
+            {
+                "value": "#0000FF",
+                "label": "Blue"
+            }
+        ]
+    }
+}
