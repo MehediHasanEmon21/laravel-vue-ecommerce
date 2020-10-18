@@ -173,7 +173,7 @@ class ProductController extends Controller
         if (!\Request::ajax()) {
             return abort(404);
         }
-        return $this->index(15);
+        return $this->index(8);
     }
 
     public function getProductSideBarInfo()
@@ -207,9 +207,9 @@ class ProductController extends Controller
         } elseif ($field == 'size' || $field == 'color') {
             $products = $this->sizeColorEilter($data, $field);
         } elseif ($field == 'category_id' || $field == 'brand_id') {
-            $products = Product::where($field, $data)->orderBy('id', 'DESC')->paginate(15);
+            $products = Product::where($field, $data)->orderBy('id', 'DESC')->paginate(8);
         } else {
-            $products = $this->index(15);
+            $products = $this->index(8);
         }
 
         return response()->json([
@@ -224,14 +224,14 @@ class ProductController extends Controller
         $min = $data['0'];
         $max = $data['1'];
 
-        $products = Product::whereBetween('price', [$min, $max])->orderBy('id', 'DESC')->paginate(15);
+        $products = Product::whereBetween('price', [$min, $max])->orderBy('id', 'DESC')->paginate(8);
         return $products;
     }
 
     public function sizeColorEilter($data, $field)
     {
 
-        $products = Product::query()->where($field, 'like', "%{$data}%")->paginate(15);
+        $products = Product::query()->where($field, 'like', "%{$data}%")->paginate(8);
         return $products;
     }
 }

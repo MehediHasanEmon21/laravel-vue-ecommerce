@@ -21,6 +21,7 @@ import CheckoutComponent from '../components/public/shop/Checkout.vue'
 import AboutComponent from '../components/public/shop/About.vue'
 import ContactComponent from '../components/public/shop/Contact.vue'
 import BlogComponent from '../components/public/shop/Blog.vue'
+import WishListComponent from '../components/public/shop/WishList.vue'
 
 
 //import auth component
@@ -66,6 +67,16 @@ const router = new VueRouter({
             path: '/blog',
             component: BlogComponent,
             name: 'Blog'
+        },
+        {
+            path: '/wishlist',
+            component: WishListComponent,
+            name: 'WishList',
+            beforeEnter: (to, from, next) => {
+                const isAuthenticated = localStorage.getItem('userLoggedIn') ? true : false
+                if (to.name !== 'UserLogin' && !isAuthenticated) next({ name: 'UserLogin' })
+                else next()
+            }
         },
         //auth route
         {

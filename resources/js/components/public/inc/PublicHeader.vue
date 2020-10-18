@@ -20,7 +20,9 @@
                   </a>
                   <ul>
                     <li>
-                      <router-link :to="{name: 'UserDashboard'}">My Account</router-link>
+                      <router-link :to="{ name: 'UserDashboard' }"
+                        >My Account</router-link
+                      >
                     </li>
                     <li>
                       <a @click.prevent="userLogout">Logout</a>
@@ -33,10 +35,14 @@
                   </a>
                   <ul>
                     <li>
-                      <router-link :to="{name: 'UserLogin'}">Login</router-link>
+                      <router-link :to="{ name: 'UserLogin' }"
+                        >Login</router-link
+                      >
                     </li>
                     <li>
-                      <router-link :to="{name: 'UserRegister'}">Register</router-link>
+                      <router-link :to="{ name: 'UserRegister' }"
+                        >Register</router-link
+                      >
                     </li>
                   </ul>
                 </li>
@@ -52,7 +58,9 @@
                       <a href="cart.html">My cart</a>
                     </li>
                     <li>
-                      <a href="wishlist.html">My wishlist</a>
+                      <router-link :to="{ name: 'WishList' }"
+                        >My wishlist</router-link
+                      >
                     </li>
                     <li>
                       <a href="checkout.html">Check out</a>
@@ -65,7 +73,10 @@
                   <button type="submit">
                     <i class="mdi mdi-magnify"></i>
                   </button>
-                  <input type="text" placeholder="Search within these results..." />
+                  <input
+                    type="text"
+                    placeholder="Search within these results..."
+                  />
                 </form>
               </div>
             </div>
@@ -88,19 +99,19 @@
               <nav>
                 <ul>
                   <li>
-                    <router-link :to="{name: 'Home'}">Home</router-link>
+                    <router-link :to="{ name: 'Home' }">Home</router-link>
                   </li>
                   <li>
-                    <router-link :to="{name: 'Shop'}">Shop</router-link>
+                    <router-link :to="{ name: 'Shop' }">Shop</router-link>
                   </li>
                   <li>
-                    <router-link :to="{name: 'Blog'}">Blog</router-link>
+                    <router-link :to="{ name: 'Blog' }">Blog</router-link>
                   </li>
                   <li>
-                    <router-link :to="{name: 'About'}">About</router-link>
+                    <router-link :to="{ name: 'About' }">About</router-link>
                   </li>
                   <li>
-                    <router-link :to="{name: 'Contact'}">Contact</router-link>
+                    <router-link :to="{ name: 'Contact' }">Contact</router-link>
                   </li>
                 </ul>
               </nav>
@@ -111,19 +122,21 @@
                 <nav id="dropdown">
                   <ul>
                     <li>
-                      <router-link :to="{name: 'Home'}">Home</router-link>
+                      <router-link :to="{ name: 'Home' }">Home</router-link>
                     </li>
                     <li>
-                      <router-link :to="{name: 'Shop'}">Shop</router-link>
+                      <router-link :to="{ name: 'Shop' }">Shop</router-link>
                     </li>
                     <li>
-                      <router-link :to="{name: 'Blog'}">Blog</router-link>
+                      <router-link :to="{ name: 'Blog' }">Blog</router-link>
                     </li>
                     <li>
-                      <router-link :to="{name: 'About'}">About</router-link>
+                      <router-link :to="{ name: 'About' }">About</router-link>
                     </li>
                     <li>
-                      <router-link :to="{name: 'Contact'}">Contact</router-link>
+                      <router-link :to="{ name: 'Contact' }"
+                        >Contact</router-link
+                      >
                     </li>
                   </ul>
                 </nav>

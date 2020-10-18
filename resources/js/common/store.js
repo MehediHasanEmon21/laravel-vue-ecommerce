@@ -8,6 +8,7 @@ import { admin } from './module/admin'
 import { category } from './module/category'
 import { brand } from './module/brand'
 import { product } from './module/product'
+import { wishlist } from './module/wishlist'
 
 export const store = new Vuex.Store({
     modules: {
@@ -16,5 +17,6 @@ export const store = new Vuex.Store({
         category: category,
         brand: brand,
         product: product,
+        wishlist: wishlist,
     }
 })

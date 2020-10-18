@@ -6,6 +6,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('user-dashboard', 'HomeController@index');
     Route::get('/', 'HomeController@authUser');
+
+    //wishlisht
+
+    Route::resource('/wishlist', 'WishListController');
 });
 
 

@@ -26,7 +26,9 @@
                           </li>
                         </ul>
                       </li>
-                      <li class="sort-by floatright">Showing 1-9 of 89 Results</li>
+                      <li class="sort-by floatright">
+                        Showing 1-9 of 89 Results
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -46,7 +48,7 @@
                           </div>
                           <a href="#">
                             <img
-                              style="width:270px; height:300px"
+                              style="width: 270px; height: 300px"
                               :src="`/uploads/${product.image}`"
                               :alt="product.image"
                             />
@@ -63,14 +65,14 @@
                             >
                               <i class="mdi mdi-eye"></i>
                             </a>
-                            <a href="#" @click.prevent="addTowishList(product)">
+                            <a href="#" @click.prevent="addToWishList(product)">
                               <i class="mdi mdi-heart"></i>
                             </a>
                           </div>
                         </div>
                         <div class="product-dsc">
                           <p>
-                            <a href="#">{{product.name}}</a>
+                            <a href="#">{{ product.name }}</a>
                           </p>
                           <!-- <div class="ratting">
                             <i class="mdi mdi-star"></i>
@@ -79,7 +81,7 @@
                             <i class="mdi mdi-star-half"></i>
                             <i class="mdi mdi-star-outline"></i>
                           </div>-->
-                          <span>{{ currency }}{{product.price}}</span>
+                          <span>{{ currency }}{{ product.price }}</span>
                         </div>
                       </div>
                     </div>
@@ -111,7 +113,7 @@
                           </div>
                           <div class="col-xs-12 col-md-8">
                             <div class="list-text">
-                              <h3>{{product.name}}</h3>
+                              <h3>{{ product.name }}</h3>
 
                               <!-- <div class="ratting floatright">
                                 <p>( 27 Rating )</p>
@@ -123,23 +125,32 @@
                               </div>-->
                               <template v-if="product.discount_price">
                                 <h5>
-                                  <del>${{product.price}}</del>
-                                  {{ currency }}{{product.discount_price}}
+                                  <del>${{ product.price }}</del>
+                                  {{ currency }}{{ product.discount_price }}
                                 </h5>
                               </template>
 
-                              <template v-else>{{currency}}{{product.price}}</template>
+                              <template v-else
+                                >{{ currency }}{{ product.price }}</template
+                              >
 
-                              <p>{{product.description}}</p>
+                              <p>{{ product.description }}</p>
                               <div class="list-btn">
-                                <a href="#" @click.prevent="addToCart(product)">add to cart</a>
-                                <a href="#" @click.prevent="addToWishList(product)">wishlist</a>
+                                <a href="#" @click.prevent="addToCart(product)"
+                                  >add to cart</a
+                                >
+                                <a
+                                  href="#"
+                                  @click.prevent="addToWishList(product)"
+                                  >wishlist</a
+                                >
                                 <a
                                   href="#"
                                   @click.prevent="singleProductView(product)"
                                   data-toggle="modal"
                                   data-target="#quick-view"
-                                >zoom</a>
+                                  >zoom</a
+                                >
                               </div>
                             </div>
                           </div>
@@ -204,7 +215,10 @@
     </section>
     <!-- product-grid-view content section end -->
     <!-- quick view start -->
-    <div class="product-details quick-view modal animated zoomInUp" id="quick-view">
+    <div
+      class="product-details quick-view modal animated zoomInUp"
+      id="quick-view"
+    >
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -221,7 +235,10 @@
                           <div class="single-quick-image text-center">
                             <div class="list-img">
                               <div class="product-img tab-content">
-                                <div class="simpleLens-container tab-pane fade in" id="q-sin-1">
+                                <div
+                                  class="simpleLens-container tab-pane fade in"
+                                  id="q-sin-1"
+                                >
                                   <div class="pro-type">
                                     <span>new</span>
                                   </div>
@@ -320,8 +337,10 @@
                       <div class="col-xs-12 col-sm-7 col-md-8">
                         <div class="quick-right">
                           <div class="list-text">
-                            <h3>{{product.name}}</h3>
-                            <span v-if="product.category">{{product.category.name}}</span>
+                            <h3>{{ product.name }}</h3>
+                            <span v-if="product.category">{{
+                              product.category.name
+                            }}</span>
                             <!-- <div class="ratting floatright">
                               <p>( 27 Rating )</p>
                               <i class="mdi mdi-star"></i>
@@ -332,13 +351,15 @@
                             </div>-->
                             <template v-if="product.discount_price">
                               <h5>
-                                <del>${{product.price}}</del>
-                                {{ currency }}{{product.discount_price}}
+                                <del>${{ product.price }}</del>
+                                {{ currency }}{{ product.discount_price }}
                               </h5>
                             </template>
 
-                            <template v-else>{{currency}}{{product.price}}</template>
-                            <p>{{product.description}}</p>
+                            <template v-else
+                              >{{ currency }}{{ product.price }}</template
+                            >
+                            <p>{{ product.description }}</p>
                             <div class="all-choose">
                               <!-- <div class="s-shoose">
                                 <h5>Color</h5>
@@ -353,7 +374,9 @@
                                 <h5>Color</h5>
                                 <div class="size-drop">
                                   <div class="btn-group">
-                                    <button type="button" class="btn">Red</button>
+                                    <button type="button" class="btn">
+                                      Red
+                                    </button>
                                     <button
                                       type="button"
                                       class="btn dropdown-toggle"
@@ -366,7 +389,10 @@
                                       </span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                      <li v-for="color in product.color" :key="color">
+                                      <li
+                                        v-for="color in product.color"
+                                        :key="color"
+                                      >
                                         <input type="color" :value="color" />
                                       </li>
                                     </ul>
@@ -377,7 +403,9 @@
                                 <h5>size</h5>
                                 <div class="size-drop">
                                   <div class="btn-group">
-                                    <button type="button" class="btn">XL</button>
+                                    <button type="button" class="btn">
+                                      XL
+                                    </button>
                                     <button
                                       type="button"
                                       class="btn dropdown-toggle"
@@ -390,8 +418,11 @@
                                       </span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                      <li v-for="size in product.size" :key="size">
-                                        <a href="#">{{size}}</a>
+                                      <li
+                                        v-for="size in product.size"
+                                        :key="size"
+                                      >
+                                        <a href="#">{{ size }}</a>
                                       </li>
                                     </ul>
                                   </div>
@@ -414,14 +445,21 @@
                               </div>
                             </div>
                             <div class="list-btn">
-                              <a href="#" @click.prevent="addToCart(product)">add to cart</a>
-                              <a href="#" @click.prevent="addToWishList(product)">wishlist</a>
+                              <a href="#" @click.prevent="addToCart(product)"
+                                >add to cart</a
+                              >
+                              <a
+                                href="#"
+                                @click.prevent="addToWishList(product)"
+                                >wishlist</a
+                              >
                               <a
                                 href="#"
                                 @click.prevent="singleProductView(product)"
                                 data-toggle="modal"
                                 data-target="#quick-view"
-                              >zoom</a>
+                                >zoom</a
+                              >
                             </div>
                             <div class="share-tag clearfix">
                               <ul class="blog-share floatleft">
@@ -484,6 +522,10 @@ export default {
       currentPage: 1,
       currency: process.env.MIX_APP_CURRENCY,
       product: {},
+      wishlist: {
+        user_id: "",
+        product_id: "",
+      },
     };
   },
   components: {
@@ -497,10 +539,26 @@ export default {
       this.product = product;
     },
     addToCatt(product) {},
-    addToWishList(product) {},
+    addToWishList(product) {
+      if (Object.keys(this.user).length === 0) {
+        this.$router.push({ name: "UserLogin" });
+      } else {
+        this.wishlist.user_id = this.user.id;
+        this.wishlist.product_id = product.id;
+        axios
+          .post("/user/wishlist", this.wishlist)
+          .then(() => {
+            this.$message({
+              message: "Wishlist Added Successfully",
+              type: "success",
+              center: false,
+            });
+          })
+          .catch(() => {});
+      }
+    },
     //handle pagination
     handleCurrentChange() {
-
       this.$store.dispatch("product/getFrontendProduct", this.currentPage);
     },
   },
@@ -511,9 +569,15 @@ export default {
     products() {
       return this.$store.getters["product/productList"];
     },
+    user() {
+      return this.$store.getters["user/getUser"];
+    },
   },
 };
 </script>
 
 <style scoped>
+.el-pagination {
+  background: aqua;
+}
 </style>
