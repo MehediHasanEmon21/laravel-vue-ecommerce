@@ -55,7 +55,7 @@
                       <a href="my-account.html">My account</a>
                     </li>
                     <li>
-                      <a href="cart.html">My cart</a>
+                      <router-link :to="{ name: 'Cart' }">My cart</router-link>
                     </li>
                     <li>
                       <router-link :to="{ name: 'WishList' }"
@@ -146,47 +146,39 @@
         </div>
         <div class="col-sm-2">
           <div class="cart-itmes">
-            <a class="cart-itme-a" href="cart.html">
+            <router-link class="cart-itme-a" :to="{ name: 'Cart' }">
               <i class="mdi mdi-cart"></i>
-              02 items :
-              <strong>$86.00</strong>
-            </a>
+              {{ products.count }} items :
+              <strong>${{ products.total }}</strong>
+            </router-link>
             <div class="cartdrop">
-              <div class="sin-itme clearfix">
+              <div
+                class="sin-itme clearfix"
+                v-for="product in products.carts"
+                :key="product.id"
+              >
                 <i class="mdi mdi-close"></i>
                 <a class="cart-img" href="cart.html">
-                  <img src="/assets/public/img/cart/1.png" alt />
+                  <img :src="`/uploads/${product.attributes.image}`" alt />
                 </a>
                 <div class="menu-cart-text">
                   <a href="#">
-                    <h5>men’s black t-shirt</h5>
+                    <h5>{{ product.name }}</h5>
                   </a>
-                  <span>Color : Black</span>
-                  <span>Size : SL</span>
-                  <strong>$122.00</strong>
-                </div>
-              </div>
-              <div class="sin-itme clearfix">
-                <i class="mdi mdi-close"></i>
-                <a class="cart-img" href="cart.html">
-                  <img src="/assets/public/img/cart/2.png" alt />
-                </a>
-                <div class="menu-cart-text">
-                  <a href="#">
-                    <h5>men’s black t-shirt</h5>
-                  </a>
-                  <span>Color : Black</span>
-                  <span>Size : SL</span>
-                  <strong>$132.00</strong>
+                  <span>Color : {{ product.attributes.color }}</span>
+                  <span>Size : {{ product.attributes.size }}</span>
+                  <strong>${{ product.price }}</strong>
                 </div>
               </div>
               <div class="total">
                 <span>
                   total
-                  <strong>= $306.00</strong>
+                  <strong>= ${{ products.total }}</strong>
                 </span>
               </div>
-              <a class="goto" href="cart.html">go to cart</a>
+              <router-link class="goto" :to="{ name: 'Cart' }"
+                >go to cart</router-link
+              >
               <a class="out-menu" href="checkout.html">Check out</a>
             </div>
           </div>
@@ -203,6 +195,9 @@ export default {
     user() {
       return this.$store.getters["user/getUser"];
     },
+    products() {
+      return this.$store.getters["cart/productList"];
+    },
   },
   methods: {
     getUser() {
@@ -217,10 +212,14 @@ export default {
         type: "success",
       });
     },
+    productList() {
+      this.$store.dispatch("cart/productList");
+    },
   },
 
   created() {
     this.getUser();
+    this.productList();
   },
 };
 </script>

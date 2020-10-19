@@ -9,7 +9,10 @@
                 <div class="card-header border-0">
                   <div class="d-flex justify-content-between">
                     <h3 class="card-title">Product List</h3>
-                    <router-link :to="{name: 'AddOrUpdateProduct'}" class="btn btn-info">
+                    <router-link
+                      :to="{ name: 'AddOrUpdateProduct' }"
+                      class="btn btn-info"
+                    >
                       Add New
                       <i class="el-icon-plus el-icon-right"></i>
                     </router-link>
@@ -19,7 +22,8 @@
                     @click="multipleDelete"
                     type="danger"
                     size="small"
-                  >Multiple Delete</el-button>
+                    >Multiple Delete</el-button
+                  >
                 </div>
 
                 <el-table
@@ -28,31 +32,62 @@
                   style="width: 100%"
                   @selection-change="handleSelectionChange"
                 >
-                  <el-table-column type="selection" width="55"></el-table-column>
+                  <el-table-column
+                    type="selection"
+                    width="55"
+                  ></el-table-column>
                   <el-table-column label="Date" width="120">
-                    <template slot-scope="scope">{{ scope.row.created_at | timeFormat }}</template>
+                    <template slot-scope="scope">{{
+                      scope.row.created_at | timeFormat
+                    }}</template>
                   </el-table-column>
-                  <el-table-column property="name" label="Name" width="120"></el-table-column>
+                  <el-table-column
+                    property="name"
+                    label="Name"
+                    width="120"
+                  ></el-table-column>
                   <el-table-column label="Category" width="100">
-                    <template slot-scope="scope">{{ scope.row.category.name }}</template>
+                    <template slot-scope="scope">{{
+                      scope.row.category.name
+                    }}</template>
                   </el-table-column>
                   <el-table-column label="Brand" width="100">
-                    <template slot-scope="scope">{{ scope.row.brand.name }}</template>
+                    <template slot-scope="scope">{{
+                      scope.row.brand.name
+                    }}</template>
                   </el-table-column>
-                  <el-table-column property="price" label="Price" width="120"></el-table-column>
-                  <el-table-column property="quantity" label="Quantity" width="120"></el-table-column>
+                  <el-table-column
+                    property="price"
+                    label="Price"
+                    width="120"
+                  ></el-table-column>
+                  <el-table-column
+                    property="quantity"
+                    label="Quantity"
+                    width="120"
+                  ></el-table-column>
                   <el-table-column fixed="right" label="Operations">
                     <template slot-scope="scope">
                       <router-link
                         class="btn btn-success btn-sm"
-                        :to="{name: 'EditProduct',params: {id: scope.row.id}}"
-                      >Edit</router-link>
-                      <el-button @click="deleteProduct(scope.row)" type="danger" size="small">Delete</el-button>
+                        :to="{
+                          name: 'EditProduct',
+                          params: { id: scope.row.id },
+                        }"
+                        >Edit</router-link
+                      >
+                      <el-button
+                        @click="deleteProduct(scope.row)"
+                        type="danger"
+                        size="small"
+                        >Delete</el-button
+                      >
                       <el-button
                         @click="detailProduct(scope.row)"
                         type="primary"
                         size="small"
-                      >Details</el-button>
+                        >Details</el-button
+                      >
                     </template>
                   </el-table-column>
                 </el-table>
@@ -74,7 +109,12 @@
     </div>
     <!-- Product Dialouge -->
 
-    <el-dialog :title="product.name" :visible.sync="centerDialogVisible" width="80%" center>
+    <el-dialog
+      :title="product.name"
+      :visible.sync="centerDialogVisible"
+      width="80%"
+      center
+    >
       <table class="table table-stripped table-bordered">
         <tr>
           <td style="width: 30%">
@@ -111,7 +151,12 @@
             <strong>Image:</strong>
           </td>
           <td>
-            <img :src="`/uploads/${product.image}`" width="60px" height="60px" alt />
+            <img
+              :src="`/uploads/${product.image}`"
+              width="60px"
+              height="60px"
+              alt
+            />
           </td>
         </tr>
         <tr>
@@ -119,7 +164,7 @@
             <strong>Color:</strong>
           </td>
           <td>
-            <span v-for="(color,index) in product.color" :key="index">
+            <span v-for="(color, index) in product.color" :key="index">
               <input type="color" :value="color" />&nbsp;&nbsp;
             </span>
           </td>
@@ -129,9 +174,10 @@
             <strong>Size:</strong>
           </td>
           <td>
-            <span v-for="(size,index) in product.size" :key="index">
+            <span v-for="(size, index) in product.size" :key="index">
               {{ size }}
-              <template v-if="index != product.size.length - 1">,</template> &nbsp;&nbsp;
+              <template v-if="index != product.size.length - 1">,</template>
+              &nbsp;&nbsp;
             </span>
           </td>
         </tr>

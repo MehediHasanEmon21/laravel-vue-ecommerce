@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,16 @@ Route::get('user-login', 'HomeController@index')->name('login');
 Route::get('/product-list', 'ProductController@getFronendProduct');
 Route::get('/product-sidebar-info', 'ProductController@getProductSideBarInfo');
 Route::get('/product-filter/{data}', 'ProductController@productFilter');
+
+//cart route
+Route::group(['prefix' => 'cart'], function () {
+
+    Route::post('/cart-product-add', 'CartController@addCart');
+    Route::get('/cart-products', 'CartController@allCart');
+    Route::get('/destroy', function () {
+        \Session::flush();
+    });
+});
 
 
 Route::get('/', function () {

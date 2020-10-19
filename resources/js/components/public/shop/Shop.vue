@@ -538,7 +538,19 @@ export default {
     singleProductView(product) {
       this.product = product;
     },
-    addToCatt(product) {},
+    addToCart(product) {
+      axios.post("/cart/cart-product-add", product).then((res) => {
+        this.cartProducts();
+        this.$message({
+          message: "Cart Product Add Successfully",
+          type: "success",
+          center: false,
+        });
+      });
+    },
+    cartProducts() {
+      this.$store.dispatch("cart/productList");
+    },
     addToWishList(product) {
       if (Object.keys(this.user).length === 0) {
         this.$router.push({ name: "UserLogin" });
