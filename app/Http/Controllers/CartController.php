@@ -37,4 +37,19 @@ class CartController extends Controller
             'count' => Cart::getContent()->count(),
         ]);
     }
+
+    public function remove_cart($id)
+    {
+        Cart::remove($id);
+    }
+
+    public function update_cart(Request $request)
+    {
+        Cart::update($request->id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->qty
+            ),
+        ));
+    }
 }

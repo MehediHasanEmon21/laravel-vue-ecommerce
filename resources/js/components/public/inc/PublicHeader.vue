@@ -157,7 +157,7 @@
                 v-for="product in products.carts"
                 :key="product.id"
               >
-                <i class="mdi mdi-close"></i>
+                <i @click.prevent="removeCart(product.id)" class="mdi mdi-close"></i>
                 <a class="cart-img" href="cart.html">
                   <img :src="`/uploads/${product.attributes.image}`" alt />
                 </a>
@@ -215,6 +215,20 @@ export default {
     productList() {
       this.$store.dispatch("cart/productList");
     },
+     removeCart(id){
+        axios.get('/cart/remove-cart/'+id)
+        .then((result) => {
+            this.productList();
+            this.$message({
+            message: "Cart Product Remove Successfully",
+            type: "success",
+            center: false,
+            });
+
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
   },
 
   created() {

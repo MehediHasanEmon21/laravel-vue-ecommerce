@@ -41,6 +41,7 @@
                         <a class="dec qtybutton">-</a>
                         <input
                           type="text"
+                          @keypress.enter.prevent="updateCart(product.id,product.quantity)"
                           v-model="product.quantity"
                           name="qtybutton"
                           class="plus-minus-box"
@@ -53,7 +54,7 @@
                     <strong>${{ product.price * product.quantity }}</strong>
                   </td>
                   <td>
-                    <i class="mdi mdi-close" title="Remove this product"></i>
+                    <i @click.prevent="removeCart(product.id)" class="mdi mdi-close" title="Remove this product"></i>
                   </td>
                 </tr>
               </tbody>
@@ -134,6 +135,33 @@ export default {
     productList() {
       this.$store.dispatch("cart/productList");
     },
+    removeCart(id){
+        axios.get('/cart/remove-cart/'+id)
+        .then((result) => {
+            this.productList();
+            this.$message({
+            message: "Cart Product Remove Successfully",
+            type: "success",
+            center: false,
+            });
+
+        }).catch((err) => {
+            console.log(err)
+        });
+    },
+    updateCart(id,qty){
+        axios.post('/cart/cart-update',{id: id, qty: qty})
+        .then((result) => {
+            this.productList();
+            this.$message({
+            message: "Cart Product Update Successfully",
+            type: "success",
+            center: false,
+            });
+        }).catch((err) => {
+
+        });
+    }
   },
   created() {
     this.productList();

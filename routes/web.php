@@ -36,9 +36,8 @@ Route::group(['prefix' => 'cart'], function () {
 
     Route::post('/cart-product-add', 'CartController@addCart');
     Route::get('/cart-products', 'CartController@allCart');
-    Route::get('/destroy', function () {
-        \Session::flush();
-    });
+    Route::get('/remove-cart/{id}', 'CartController@remove_cart');
+    Route::post('/cart-update', 'CartController@update_cart');
 });
 
 
