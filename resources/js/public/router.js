@@ -51,7 +51,12 @@ const router = new VueRouter({
         {
             path: '/checkout',
             component: CheckoutComponent,
-            name: 'Checkout'
+            name: 'Checkout',
+            beforeEnter: (to, from, next) => {
+                const isAuthenticated = localStorage.getItem('userLoggedIn') ? true : false
+                if (to.name !== 'UserLogin' && !isAuthenticated) next({ name: 'UserLogin' })
+                else next()
+            }
         },
         {
             path: '/about',

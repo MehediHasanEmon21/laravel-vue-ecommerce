@@ -63,7 +63,7 @@
                       >
                     </li>
                     <li>
-                      <a href="checkout.html">Check out</a>
+                      <router-link :to="{ name: 'Checkout' }">Check out</router-link>
                     </li>
                   </ul>
                 </li>
@@ -179,7 +179,7 @@
               <router-link class="goto" :to="{ name: 'Cart' }"
                 >go to cart</router-link
               >
-              <a class="out-menu" href="checkout.html">Check out</a>
+              <router-link :to="{ name: 'Checkout' }">Check out</router-link>
             </div>
           </div>
         </div>
