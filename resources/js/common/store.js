@@ -10,6 +10,7 @@ import { brand } from './module/brand'
 import { product } from './module/product'
 import { wishlist } from './module/wishlist'
 import { cart } from './module/cart'
+import { order } from './module/order'
 
 export const store = new Vuex.Store({
     modules: {
@@ -20,5 +21,6 @@ export const store = new Vuex.Store({
         product: product,
         wishlist: wishlist,
         cart: cart,
+        order: order,
     }
 })

@@ -30,6 +30,7 @@ import CustomerList from '../components/admin/customer/CustomerList'
 
 //order component import
 import OrderList from '../components/admin/order/OrderList'
+import OrderDetail from '../components/admin/order/OrderDetail'
 
 
 
@@ -96,6 +97,11 @@ const router = new VueRouter({
             path: '/admin/orders',
             component: OrderList,
             name: 'OrderList'
+        },
+        {
+            path: '/admin/order-details/:order_id',
+            component: OrderDetail,
+            name: 'OrderDetail'
         },
     ]
 })

@@ -13,6 +13,7 @@
                   type="text"
                   v-model="form.name"
                   placeholder="Name here.."
+                  readonly
                 />
                 <small style="color: red" v-if="errors['name']">{{
                   errors["name"][0]
@@ -21,6 +22,7 @@
                   type="email"
                   v-model="form.email"
                   placeholder="Email Address.."
+                  readonly
                 />
                 <small style="color: red" v-if="errors['email']">{{
                   errors["email"][0]
@@ -29,6 +31,7 @@
                   type="number"
                   v-model="form.phone"
                   placeholder="Phone Number.."
+                  readonly
                 />
                 <small style="color: red" v-if="errors['phone']">{{
                   errors["phone"][0]
@@ -37,6 +40,7 @@
                   type="text"
                   v-model="form.address"
                   placeholder="Address.."
+                  readonly
                 />
                 <small style="color: red" v-if="errors['address']">{{
                   errors["address"][0]
@@ -143,15 +147,14 @@
             <div class="categories">
               <ul id="accordion" class="panel-group clearfix">
                 <li class="panel">
-                  <select class="form-control">
-                    <option value="">Select Method</option>
-                    <option>Cash On Delivary</option>
-                    <option>Card Payment</option>
+                  <select class="form-control" v-model="payment_type">
+                    <option value="cash_on_delivery">Cash On Delivary</option>
+                    <option value="card_payment">Card Payment</option>
                   </select>
                 </li>
               </ul>
-              <div class="submit-text">
-                <a href="#">place order</a>
+              <div class="submit-text" v-if="products.total > 0">
+                <a href="#" @click.prevent="placeOrder">place order</a>
               </div>
             </div>
           </div>
@@ -170,19 +173,45 @@ export default {
       errors: {},
       shipping: {},
       shippingDisplay: false,
+      payment_type: "cash_on_delivery",
     };
   },
   methods: {
     productList() {
       this.$store.dispatch("cart/productList");
     },
+    getUser() {
+      this.$store.dispatch("user/getUser");
+    },
+    placeOrder() {
+      axios
+        .post("checkout", {
+          shipping: this.shipping,
+          shippind_address: this.shippingDisplay,
+          payment_type: this.payment_type,
+        })
+        .then((result) => {})
+        .catch((err) => {});
+    },
   },
   created() {
     this.productList();
+    this.getUser();
   },
   computed: {
     products() {
       return this.$store.getters["cart/productList"];
+    },
+    user() {
+      return this.$store.getters["user/getUser"];
+    },
+  },
+  watch: {
+    user: {
+      handler: function (newVal, oldVal) {
+        this.form = newVal;
+      },
+      deep: true,
     },
   },
 };

@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     //product route
     Route::resource('product', 'ProductController');
+    Route::get('/order-list', 'OrderController@index');
+    Route::get('/order-detail/{id}', 'OrderController@detail');
     Route::post('/product/multi/delete', 'ProductController@multiDelete');
     Route::post('/product-update/{id}', 'ProductController@updateProduct');
 });

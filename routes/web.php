@@ -40,6 +40,8 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/cart-update', 'CartController@update_cart');
 });
 
+Route::post('checkout', 'OrderController@checkout');
+
 
 Route::get('/', function () {
     return view('public.public_master');

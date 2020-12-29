@@ -63,7 +63,9 @@
                       >
                     </li>
                     <li>
-                      <router-link :to="{ name: 'Checkout' }">Check out</router-link>
+                      <router-link :to="{ name: 'Checkout' }"
+                        >Check out</router-link
+                      >
                     </li>
                   </ul>
                 </li>
@@ -157,7 +159,10 @@
                 v-for="product in products.carts"
                 :key="product.id"
               >
-                <i @click.prevent="removeCart(product.id)" class="mdi mdi-close"></i>
+                <i
+                  @click.prevent="removeCart(product.id)"
+                  class="mdi mdi-close"
+                ></i>
                 <a class="cart-img" href="cart.html">
                   <img :src="`/uploads/${product.attributes.image}`" alt />
                 </a>
@@ -179,7 +184,9 @@
               <router-link class="goto" :to="{ name: 'Cart' }"
                 >go to cart</router-link
               >
-              <router-link :to="{ name: 'Checkout' }">Check out</router-link>
+              <router-link class="out-menu" :to="{ name: 'Checkout' }"
+                >Check out</router-link
+              >
             </div>
           </div>
         </div>
@@ -215,20 +222,21 @@ export default {
     productList() {
       this.$store.dispatch("cart/productList");
     },
-     removeCart(id){
-        axios.get('/cart/remove-cart/'+id)
+    removeCart(id) {
+      axios
+        .get("/cart/remove-cart/" + id)
         .then((result) => {
-            this.productList();
-            this.$message({
+          this.productList();
+          this.$message({
             message: "Cart Product Remove Successfully",
             type: "success",
             center: false,
-            });
-
-        }).catch((err) => {
-            console.log(err)
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-    }
+    },
   },
 
   created() {
