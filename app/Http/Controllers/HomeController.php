@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Model\Order;
+use App\Model\OrderItem;
 
 class HomeController extends Controller
 {
@@ -46,6 +48,16 @@ class HomeController extends Controller
         $users = User::where('name', 'like', '%' . $query . '%')->paginate(5);
         return response()->json([
             'search_users' => $users
+
+        ], 200);
+    }
+
+    public function orderList($number = 10)
+    {
+
+        $orders = Order::with(['order_items', 'user'])->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate($number);
+        return response()->json([
+            'orders' => $orders
 
         ], 200);
     }

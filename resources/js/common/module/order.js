@@ -31,6 +31,15 @@ export const order = {
 
                 });
         },
+         userOrderList(context, payload) {
+            Axios.get('/user/order-list?page=' + payload)
+                .then((result) => {
+                    context.commit('orderList', result.data.orders)
+
+                }).catch((err) => {
+
+                });
+        },
         order(context, payload) {
             Axios.get('/admin/order-detail/' + payload)
                 .then((result) => {
