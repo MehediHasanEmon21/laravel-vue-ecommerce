@@ -37,7 +37,11 @@
       <div class="range-slider clearfix">
         <form action="#" method="get">
           <label>
-            <span>You range</span>
+            <span
+              >Range: ${{ sidebars.price.min_price }} - ${{
+                sidebars.price.max_price
+              }}</span
+            >
           </label>
           <div class="block" v-if="sidebars.price">
             <el-slider

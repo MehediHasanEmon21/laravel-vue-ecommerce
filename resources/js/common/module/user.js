@@ -21,13 +21,22 @@ export const user = {
     },
 
     actions: {
+
         getUser(context, payload) {
-            Axios.get('/user')
+            let userLogin = localStorage.getItem('userLoggedIn')
+            if (userLogin) {
+
+                Axios.get('/user')
                 .then((result) => {
                     context.commit('getUser', result.data.user)
                 }).catch((err) => {
 
                 });
+
+            } else {
+                 context.commit('getUser', {user: ''})
+            }
+
 
         },
         userList(context, payload) {

@@ -35,8 +35,12 @@
             <div class="newsletter newsletter2">
               <h3>newsletter</h3>
               <form action="mail.php" method="post">
-                <input type="text" name="email" placeholder="Enter your email..." />
-                <input type="submit" value="subscribe" />
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Enter your email..."
+                />
+                <input type="button" value="subscribe" />
               </form>
             </div>
             <div class="social-icons">
@@ -61,10 +65,22 @@
             <div class="newsletter get-touch">
               <h3>get in touch</h3>
               <form action="mail.php" method="post">
-                <input type="text" name="name" placeholder="Enter your Name..." />
-                <input type="text" name="email" placeholder="Enter your email..." />
-                <textarea name="message" rows="2" placeholder="Enter your message...."></textarea>
-                <input type="submit" value="send your message" />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your Name..."
+                />
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Enter your email..."
+                />
+                <textarea
+                  name="message"
+                  rows="2"
+                  placeholder="Enter your message...."
+                ></textarea>
+                <input type="button" value="send your message" />
               </form>
             </div>
           </div>
@@ -111,34 +127,29 @@
                 <div class="footer-menu">
                   <ul>
                     <li>
-                      <a href="login.html">
+                      <router-link :to="{ name: 'UserDashboard' }">
                         <i class="mdi mdi-menu-right"></i>My Account
-                      </a>
+                      </router-link>
                     </li>
                     <li>
-                      <a href="wishlist.html">
+                      <router-link :to="{ name: 'WishList' }">
                         <i class="mdi mdi-menu-right"></i>My Wishlist
-                      </a>
+                      </router-link>
                     </li>
                     <li>
-                      <a href="cart.html">
+                      <router-link :to="{ name: 'Cart' }">
                         <i class="mdi mdi-menu-right"></i>My Cart
-                      </a>
+                      </router-link>
                     </li>
                     <li>
-                      <a href="login.html">
+                      <router-link :to="{ name: 'UserLogin' }">
                         <i class="mdi mdi-menu-right"></i>Sign In
-                      </a>
+                      </router-link>
                     </li>
                     <li>
-                      <a href="checkout.html">
+                      <router-link :to="{ name: 'Checkout' }">
                         <i class="mdi mdi-menu-right"></i>Check out
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="mdi mdi-menu-right"></i>Track My Orde
-                      </a>
+                      </router-link>
                     </li>
                   </ul>
                 </div>
@@ -152,7 +163,7 @@
                 <div class="footer-menu">
                   <ul>
                     <li>
-                      <a href="contact.html">
+                      <a href="#">
                         <i class="mdi mdi-menu-right"></i>New Products
                       </a>
                     </li>
@@ -193,7 +204,7 @@
                 <div class="footer-menu">
                   <ul>
                     <li>
-                      <a href="contact.html">
+                      <a href="#">
                         <i class="mdi mdi-menu-right"></i>Return Exchange
                       </a>
                     </li>
@@ -235,32 +246,50 @@
                   <ul>
                     <li>
                       <a href="#">
-                        <img src="/assets/public/img/footer/in1.png" alt="Instagram" />
+                        <img
+                          src="/assets/public/img/footer/in1.png"
+                          alt="Instagram"
+                        />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="/assets/public/img/footer/in2.png" alt="Instagram" />
+                        <img
+                          src="/assets/public/img/footer/in2.png"
+                          alt="Instagram"
+                        />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="/assets/public/img/footer/in3.png" alt="Instagram" />
+                        <img
+                          src="/assets/public/img/footer/in3.png"
+                          alt="Instagram"
+                        />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="/assets/public/img/footer/in4.png" alt="Instagram" />
+                        <img
+                          src="/assets/public/img/footer/in4.png"
+                          alt="Instagram"
+                        />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="/assets/public/img/footer/in5.png" alt="Instagram" />
+                        <img
+                          src="/assets/public/img/footer/in5.png"
+                          alt="Instagram"
+                        />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="/assets/public/img/footer/in6.png" alt="Instagram" />
+                        <img
+                          src="/assets/public/img/footer/in6.png"
+                          alt="Instagram"
+                        />
                       </a>
                     </li>
                   </ul>
@@ -277,7 +306,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-6">
-            <p>&copy; Sellshop 2016. All Rights Reserved.</p>
+            <p>&copy; Sellshop 2021. All Rights Reserved.</p>
           </div>
           <div class="col-xs-12 col-sm-6 text-right">
             <a href="#">

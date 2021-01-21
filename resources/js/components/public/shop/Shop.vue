@@ -327,9 +327,13 @@
                                     class="form-control form-control-sm"
                                     v-model="product_color"
                                   >
-                                    <option>red</option>
-                                    <option>yellow</option>
-                                    <option>green</option>
+                                    <option
+                                      :value="color"
+                                      v-for="color in product.color"
+                                      :key="color"
+                                    >
+                                      {{ color }}
+                                    </option>
                                   </select>
                                 </div>
                               </div>
@@ -402,8 +406,8 @@ export default {
         user_id: "",
         product_id: "",
       },
-      product_color: "red",
-      product_size: "l",
+      product_color: "",
+      product_size: "",
       product_qty: "1",
     };
   },
@@ -420,6 +424,8 @@ export default {
     },
     singleProductView(product) {
       this.product = product;
+      this.product_color = product.color[0];
+      this.product_size = product.size[0];
     },
     addToCart(product) {
       axios.post("/cart/cart-product-add", product).then((res) => {
@@ -510,5 +516,8 @@ export default {
 .form-control {
   width: 15% !important;
   height: 31px !important;
+}
+.pagnation-ul {
+  padding-bottom: 18px;
 }
 </style>

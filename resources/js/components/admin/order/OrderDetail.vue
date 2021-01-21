@@ -114,6 +114,7 @@
                         </tr>
                       </table>
                     </div>
+                    <a @click.prevent="orderSuccess(order.id)" v-if="order.status == 'pending'" class="btn btn-success">Done Delivery</a>
                   </div>
                   <!-- /.col -->
                 </div>
@@ -144,6 +145,19 @@ export default {
   methods: {
     singleOrder() {
       this.$store.dispatch("order/order", this.$route.params.order_id);
+    },
+    orderSuccess(order_id) {
+      axios
+        .get("/admin/order-success/" + order_id)
+        .then((result) => {
+          this.$message({
+            message: "Order Delivered Successfully",
+            type: "success",
+            center: false,
+          });
+          this.$router.push({ name: "OrderList" });
+        })
+        .catch((err) => {});
     },
   },
   created() {

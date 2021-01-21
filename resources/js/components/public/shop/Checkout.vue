@@ -45,9 +45,18 @@
                 <small style="color: red" v-if="errors['address']">{{
                   errors["address"][0]
                 }}</small>
-
-                <input type="checkbox" v-model="shippingDisplay" />
-                Ship Different Address
+                <div class="form-group form-row" style="margin-top: 20px">
+                  <div class="col-md-6">
+                    <strong>ship to different address</strong>
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="checkbox"
+                      v-model="shippingDisplay"
+                      style="height: 15px"
+                    />
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -196,14 +205,19 @@ export default {
     return {
       form: {},
       errors: {},
-      shipping: {},
+      shipping: {
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+      },
       shippingDisplay: false,
       payment_type: "cash_on_delivery",
       cardPayment: {
-        cardNumber: "",
-        expYear: "",
-        expMonth: "",
-        cvc: "",
+        cardNumber: "4242424242424242",
+        expYear: "23",
+        expMonth: "11",
+        cvc: "123",
       },
       stripeError: "",
     };
@@ -216,6 +230,25 @@ export default {
       this.$store.dispatch("user/getUser");
     },
     placeOrder() {
+      if (this.shippingDisplay == true) {
+        if (
+          this.shipping.name == "" ||
+          this.shipping.email == "" ||
+          this.shipping.phone == "" ||
+          this.shipping.address == ""
+        ) {
+          this.$message({
+            message: "Warning, Shipping Info is required",
+            type: "error",
+          });
+        } else {
+          this.requestOrder();
+        }
+      } else {
+        this.requestOrder();
+      }
+    },
+    requestOrder() {
       axios
         .post("checkout", {
           shipping: this.shipping,

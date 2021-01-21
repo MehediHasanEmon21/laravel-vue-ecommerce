@@ -67,9 +67,9 @@
           </div>
           <div class="col-sm-4">
             <div class="colect-text">
-              <h4><router-link :to="{name: 'Shop'}">Fashion Collection 2020</router-link></h4>
+              <h4><router-link :to="{name: 'Shop'}">Fashion Collection 2021</router-link></h4>
               <h5>
-                big sale of the men 2020 fashion <br />
+                big sale of the men 2021 fashion <br />
                 Up To 23% Off!
               </h5>
               <router-link :to="{name: 'Shop'}">Shop Now <i class="mdi mdi-arrow-right"></i></router-link>
@@ -1167,7 +1167,7 @@
                     </div>
                     <div class="s-blog-text">
                       <h4>
-                        <a href="single-blog.html"
+                        <a href="#"
                           >Fashion style fine arts drawing</a
                         >
                       </h4>
@@ -1183,7 +1183,7 @@
                     </div>
                     <div class="date-read clearfix">
                       <a href="#"><i class="mdi mdi-clock"></i> jun 25, 2016</a>
-                      <a href="single-blog.html">read more</a>
+                      <a href="#">read more</a>
                     </div>
                   </div>
                 </div>
@@ -1212,14 +1212,13 @@
                     </div>
                     <div class="date-read clearfix">
                       <a href="#"><i class="mdi mdi-clock"></i> jun 15, 2016</a>
-                      <a href="single-blog.html">read more</a>
+                      <a href="#">read more</a>
                     </div>
                   </div>
                 </div>
               </div>
             </li>
           </ul>
-          <button id="load-more-blog">Load More</button>
         </div>
       </div>
     </section>
@@ -1362,12 +1361,12 @@
                             <template v-if="product.discount_price">
                               <h5>
                                 <del>${{ product.price }}</del>
-                                {{ currency }}{{ product.discount_price }}
+                                 $ {{ product.discount_price }}
                               </h5>
                             </template>
 
                             <template v-else
-                              >{{ currency }}{{ product.price }}</template
+                              > $ {{ product.price }}</template
                             >
                             <p>{{ product.description }}</p>
                             <div class="all-choose">
@@ -1378,9 +1377,9 @@
                                     class="form-control form-control-sm"
                                     v-model="product_color"
                                   >
-                                    <option>red</option>
-                                    <option>yellow</option>
-                                    <option>green</option>
+                                    <option :value="color"
+                                      v-for="color in product.color"
+                                      :key="color">{{color}}</option>
                                   </select>
                                 </div>
                               </div>
@@ -1444,8 +1443,8 @@ export default {
   data() {
     return {
       product: {},
-      product_color: "red",
-      product_size: "l",
+      product_color: "",
+      product_size: "",
       product_qty: "1",
       wishlist: {
         user_id: "",
@@ -1459,6 +1458,8 @@ export default {
     },
     singleProductView(product) {
       this.product = product;
+      this.product_color = product.color[0];
+      this.product_size = product.size[0];
     },
     addToCart(product) {
       axios.post("/cart/cart-product-add", product).then((res) => {

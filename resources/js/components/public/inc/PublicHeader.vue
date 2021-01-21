@@ -52,7 +52,9 @@
                   </a>
                   <ul>
                     <li>
-                      <a href="my-account.html">My account</a>
+                      <router-link :to="{ name: 'UserDashboard' }"
+                        >My account</router-link
+                      >
                     </li>
                     <li>
                       <router-link :to="{ name: 'Cart' }">My cart</router-link>
@@ -70,17 +72,6 @@
                   </ul>
                 </li>
               </ul>
-              <div class="right floatright">
-                <form action="#" method="get">
-                  <button type="submit">
-                    <i class="mdi mdi-magnify"></i>
-                  </button>
-                  <input
-                    type="text"
-                    placeholder="Search within these results..."
-                  />
-                </form>
-              </div>
             </div>
           </div>
         </div>
@@ -90,9 +81,9 @@
       <div class="row">
         <div class="col-sm-2">
           <div class="logo">
-            <a href="index.html">
+            <router-link :to="{ name: 'Home' }">
               <img src="/assets/public/img/logo2.png" alt="Sellshop" />
-            </a>
+            </router-link>
           </div>
         </div>
         <div class="col-sm-8">

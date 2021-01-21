@@ -35,6 +35,14 @@ class OrderController extends Controller
         ], 200);
     }
 
+    public function success($id)
+    {
+
+        $order = Order::find($id);
+        $order->status = 'success';
+        $order->save();
+    }
+
     public function checkout(Request $request)
     {
 

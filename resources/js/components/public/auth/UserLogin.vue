@@ -7,17 +7,33 @@
             <div class="main-input padding60">
               <div class="log-title">
                 <h3>
-                  <strong>registered customers</strong>
+                  <strong>login customers</strong>
                 </h3>
               </div>
               <div class="login-text">
                 <div class="custom-input">
                   <p>If you have an account with us, Please log in!</p>
-                  <form action="mail.php" method="post" @submit.prevent="userLogin">
-                    <input type="email" v-model="form.email" placeholder="Email" />
-                    <small style="color: red" v-if="errors['email']">{{ errors['email'][0] }}</small>
-                    <input type="password" v-model="form.password" placeholder="Password" />
-                    <small style="color: red" v-if="errors['password']">{{ errors['password'][0] }}</small>
+                  <form
+                    action="mail.php"
+                    method="post"
+                    @submit.prevent="userLogin"
+                  >
+                    <input
+                      type="email"
+                      v-model="form.email"
+                      placeholder="Email"
+                    />
+                    <small style="color: red" v-if="errors['email']">{{
+                      errors["email"][0]
+                    }}</small>
+                    <input
+                      type="password"
+                      v-model="form.password"
+                      placeholder="Password"
+                    />
+                    <small style="color: red" v-if="errors['password']">{{
+                      errors["password"][0]
+                    }}</small>
                     <!-- <a class="forget" href="#">Forget your password?</a> -->
                     <div class="submit-text">
                       <button type="submit">login</button>

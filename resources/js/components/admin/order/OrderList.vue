@@ -32,11 +32,24 @@
                     label="Payment Type"
                     width="120"
                   ></el-table-column>
-                  <el-table-column
-                    property="status"
-                    label="Status"
-                    show-overflow-tooltip
-                  ></el-table-column>
+
+                  <el-table-column label="Status" width="120">
+                    <template slot-scope="scope">
+                      <span
+                        v-if="scope.row.status == 'pending'"
+                        style="padding: 10px"
+                        class="badge badge-warning"
+                        >{{ scope.row.status }}</span
+                      >
+                      <span
+                        style="padding: 10px"
+                        v-else
+                        class="bg bg-success"
+                        >{{ scope.row.status }}</span
+                      >
+                    </template>
+                  </el-table-column>
+
                   <el-table-column fixed="right" label="Operations">
                     <template slot-scope="scope">
                       <el-button
