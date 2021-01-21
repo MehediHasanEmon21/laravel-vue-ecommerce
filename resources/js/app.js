@@ -10,6 +10,10 @@ import { store } from './common/store'
 
 import library from './common/library'
 
+import VueChatScroll from 'vue-chat-scroll';
+
+Vue.use(VueChatScroll);
+
 
 const app = new Vue({
     el: '#app',

@@ -7,6 +7,10 @@ use Cart;
 use Auth;
 use App\Model\Order;
 use App\Model\OrderItem;
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Charge;
+use Stripe\Token;
 
 class OrderController extends Controller
 {
@@ -33,6 +37,44 @@ class OrderController extends Controller
 
     public function checkout(Request $request)
     {
+
+        $payment_type = $request->payment_type;
+
+        if ($payment_type == 'card_payment') {
+
+            Stripe::setApiKey('sk_test_oRAFkDgy88u6oJrpjSYwvSEi00w4UQBdxz');
+
+            $card = $request->card_info;
+
+            $token = Token::create([
+                'card' => [
+                    'number' => $card['cardNumber'],
+                    'exp_month' => $card['expMonth'],
+                    'exp_year' => $card['expYear'],
+                    'cvc' => $card['cvc'],
+                ],
+            ]);
+            $email  = Auth::user()->email;
+
+            $customer = Customer::create([
+                'email' => $email,
+                'source'  => $token,
+            ]);
+
+            $charge = Charge::create([
+                'customer' => $customer->id,
+                'amount'   => Cart::getTotal() * 100,
+                'currency' => 'usd',
+            ]);
+            $this->order_process($request);
+        } else if ($payment_type == 'cash_on_delivery') {
+            $this->order_process($request);
+        }
+    }
+
+    public function order_process($request)
+    {
+
         $user = Auth::user();
 
         $shipping_address = '';
@@ -46,13 +88,13 @@ class OrderController extends Controller
         $total = Cart::getTotal();
         $sub_total = Cart::getTotal();
 
-        $payment_type = $request->payment_type;
+
 
         $order = new Order();
 
         $order->user_id = $user->id;
         $order->shipping_address = json_encode($shipping_address);
-        $order->payment_type = $payment_type;
+        $order->payment_type = $request->payment_type;
         $order->total = $total;
         $order->sub_total = $sub_total;
         $order->save();
@@ -67,7 +109,7 @@ class OrderController extends Controller
             $order_item->item_quantity = $item->quantity;
             $order_item->save();
         }
-
+        Cart::clear();
         return response()->json('ok');
     }
 }

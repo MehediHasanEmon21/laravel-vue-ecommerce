@@ -152,6 +152,31 @@
                     <option value="card_payment">Card Payment</option>
                   </select>
                 </li>
+                <div v-if="stripeError">
+                  <small style="color: red">{{ stripeError }}</small>
+                </div>
+                <div v-if="payment_type == 'card_payment'">
+                  <input
+                    type="number"
+                    placeholder="Card Number"
+                    v-model="cardPayment.cardNumber"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Exp Month"
+                    v-model="cardPayment.expMonth"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Exp Year"
+                    v-model="cardPayment.expYear"
+                  />
+                  <input
+                    type="number"
+                    placeholder="CVC"
+                    v-model="cardPayment.cvc"
+                  />
+                </div>
               </ul>
               <div class="submit-text" v-if="products.total > 0">
                 <a href="#" @click.prevent="placeOrder">place order</a>
@@ -174,6 +199,13 @@ export default {
       shipping: {},
       shippingDisplay: false,
       payment_type: "cash_on_delivery",
+      cardPayment: {
+        cardNumber: "",
+        expYear: "",
+        expMonth: "",
+        cvc: "",
+      },
+      stripeError: "",
     };
   },
   methods: {
@@ -189,9 +221,20 @@ export default {
           shipping: this.shipping,
           shippind_address: this.shippingDisplay,
           payment_type: this.payment_type,
+          card_info: this.cardPayment,
         })
-        .then((result) => {})
-        .catch((err) => {});
+        .then((result) => {
+          this.productList();
+          this.$router.push({ name: "Home" });
+          this.$message({
+            message: "Order Done Successfully",
+            type: "success",
+            center: false,
+          });
+        })
+        .catch((err) => {
+          this.stripeError = err.response.data["message"];
+        });
     },
   },
   created() {

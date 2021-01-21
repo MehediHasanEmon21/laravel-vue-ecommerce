@@ -6,7 +6,7 @@
           <div class="col-xs-12 col-sm-4 col-md-3">
             <product-sidebar></product-sidebar>
           </div>
-          <div class="col-xs-12 col-sm-8 col-md-9">
+          <div class="col-xs-12 col-sm-8 col-md-9" v-chat-scroll>
             <div class="right-products">
               <div class="row">
                 <div class="col-xs-12">
@@ -81,7 +81,7 @@
                             <i class="mdi mdi-star-half"></i>
                             <i class="mdi mdi-star-outline"></i>
                           </div>-->
-                          <span>{{ currency }}{{ product.price }}</span>
+                          <span>${{ product.price }}</span>
                         </div>
                       </div>
                     </div>
@@ -126,13 +126,11 @@
                               <template v-if="product.discount_price">
                                 <h5>
                                   <del>${{ product.price }}</del>
-                                  {{ currency }}{{ product.discount_price }}
+                                  ${{ product.discount_price }}
                                 </h5>
                               </template>
 
-                              <template v-else
-                                >{{ currency }}{{ product.price }}</template
-                              >
+                              <template v-else>${{ product.price }}</template>
 
                               <p>{{ product.description }}</p>
                               <div class="list-btn">
@@ -161,51 +159,14 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-12">
-                  <!-- <div class="pagnation-ul">
-                    <ul class="clearfix">
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-menu-left"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">1</a>
-                      </li>
-                      <li>
-                        <a href="#">2</a>
-                      </li>
-                      <li>
-                        <a href="#">3</a>
-                      </li>
-                      <li>
-                        <a href="#">4</a>
-                      </li>
-                      <li>
-                        <a href="#">5</a>
-                      </li>
-                      <li>
-                        <a href="#">...</a>
-                      </li>
-                      <li>
-                        <a href="#">10</a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-menu-right"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>-->
-                  <el-pagination
-                    class="text-center"
-                    background
-                    layout="prev, pager, next"
-                    @current-change="handleCurrentChange"
-                    :current-page.sync="currentPage"
-                    :page-size="products.per_page"
-                    :total="products.total"
-                  ></el-pagination>
+                <div class="pagnation-ul">
+                  <template v-if="products.last_page > 1">
+                    <pagination-component
+                      :pagination="pagination"
+                      :offset="3"
+                      @paginate="productList()"
+                    ></pagination-component>
+                  </template>
                 </div>
               </div>
             </div>
@@ -352,151 +313,64 @@
                             <template v-if="product.discount_price">
                               <h5>
                                 <del>${{ product.price }}</del>
-                                {{ currency }}{{ product.discount_price }}
+                                ${{ product.discount_price }}
                               </h5>
                             </template>
 
-                            <template v-else
-                              >{{ currency }}{{ product.price }}</template
-                            >
+                            <template v-else>${{ product.price }}</template>
                             <p>{{ product.description }}</p>
                             <div class="all-choose">
-                              <!-- <div class="s-shoose">
-                                <h5>Color</h5>
-                                <div class="color-select clearfix">
-                                  <span></span>
-                                  <span class="outline"></span>
-                                  <span></span>
-                                  <span></span>
-                                </div>
-                              </div>-->
                               <div class="s-shoose">
                                 <h5>Color</h5>
                                 <div class="size-drop">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn">
-                                      Red
-                                    </button>
-                                    <button
-                                      type="button"
-                                      class="btn dropdown-toggle"
-                                      data-toggle="dropdown"
-                                      aria-haspopup="true"
-                                      aria-expanded="false"
-                                    >
-                                      <span class>
-                                        <i class="mdi mdi-chevron-down"></i>
-                                      </span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                      <li
-                                        v-for="color in product.color"
-                                        :key="color"
-                                      >
-                                        <input type="color" :value="color" />
-                                      </li>
-                                    </ul>
-                                  </div>
+                                  <select
+                                    class="form-control form-control-sm"
+                                    v-model="product_color"
+                                  >
+                                    <option>red</option>
+                                    <option>yellow</option>
+                                    <option>green</option>
+                                  </select>
                                 </div>
                               </div>
                               <div class="s-shoose">
                                 <h5>size</h5>
                                 <div class="size-drop">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn">
-                                      XL
-                                    </button>
-                                    <button
-                                      type="button"
-                                      class="btn dropdown-toggle"
-                                      data-toggle="dropdown"
-                                      aria-haspopup="true"
-                                      aria-expanded="false"
+                                  <select
+                                    class="form-control form-control-sm"
+                                    v-model="product_size"
+                                  >
+                                    <option
+                                      :value="size"
+                                      v-for="size in product.size"
+                                      :key="size"
                                     >
-                                      <span class>
-                                        <i class="mdi mdi-chevron-down"></i>
-                                      </span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                      <li
-                                        v-for="size in product.size"
-                                        :key="size"
-                                      >
-                                        <a href="#">{{ size }}</a>
-                                      </li>
-                                    </ul>
-                                  </div>
+                                      {{ size }}
+                                    </option>
+                                  </select>
                                 </div>
                               </div>
                               <div class="s-shoose">
                                 <h5>qty</h5>
                                 <form action="#" method="POST">
                                   <div class="plus-minus">
-                                    <a class="dec qtybutton">-</a>
                                     <input
-                                      type="text"
-                                      value="02"
+                                      type="number"
+                                      value="01"
                                       name="qtybutton"
-                                      class="plus-minus-box"
+                                      v-model="product_qty"
+                                      min="1"
                                     />
-                                    <a class="inc qtybutton">+</a>
                                   </div>
                                 </form>
                               </div>
                             </div>
-                            <div class="list-btn">
-                              <a href="#" @click.prevent="addToCart(product)"
+                            <div class="list-btn" data-dismiss="modal">
+                              <a
+                                href="#"
+                                @click.prevent="addCartForModal(product)"
                                 >add to cart</a
                               >
-                              <a
-                                href="#"
-                                @click.prevent="addToWishList(product)"
-                                >wishlist</a
-                              >
-                              <a
-                                href="#"
-                                @click.prevent="singleProductView(product)"
-                                data-toggle="modal"
-                                data-target="#quick-view"
-                                >zoom</a
-                              >
-                            </div>
-                            <div class="share-tag clearfix">
-                              <ul class="blog-share floatleft">
-                                <li>
-                                  <h5>share</h5>
-                                </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="mdi mdi-facebook"></i>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="mdi mdi-twitter"></i>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="mdi mdi-linkedin"></i>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="mdi mdi-vimeo"></i>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="mdi mdi-dribbble"></i>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="mdi mdi-instagram"></i>
-                                  </a>
-                                </li>
-                              </ul>
                             </div>
                           </div>
                         </div>
@@ -514,26 +388,35 @@
 </template>
 
 <script>
+import PaginationComponent from "../inc/PaginationComponent.vue";
 import ProductSidebar from "./ProductSidebar";
 export default {
   name: "Shop",
   data() {
     return {
-      currentPage: 1,
-      currency: process.env.MIX_APP_CURRENCY,
+      pagination: {
+        current_page: 1,
+      },
       product: {},
       wishlist: {
         user_id: "",
         product_id: "",
       },
+      product_color: "red",
+      product_size: "l",
+      product_qty: "1",
     };
   },
   components: {
     ProductSidebar,
+    PaginationComponent,
   },
   methods: {
     productList() {
-      this.$store.dispatch("product/getFrontendProduct", this.currentPage);
+      this.$store.dispatch(
+        "product/getFrontendProduct",
+        this.pagination.current_page
+      );
     },
     singleProductView(product) {
       this.product = product;
@@ -547,6 +430,24 @@ export default {
           center: false,
         });
       });
+    },
+    addCartForModal(product) {
+      axios
+        .post("/cart/cart-product-add-modal", {
+          product: product,
+          color: this.product_color,
+          size: this.product_size,
+          qty: this.product_qty,
+        })
+        .then((res) => {
+          this.cartProducts();
+
+          this.$message({
+            message: "Cart Product Add Successfully",
+            type: "success",
+            center: false,
+          });
+        });
     },
     cartProducts() {
       this.$store.dispatch("cart/productList");
@@ -570,9 +471,9 @@ export default {
       }
     },
     //handle pagination
-    handleCurrentChange() {
-      this.$store.dispatch("product/getFrontendProduct", this.currentPage);
-    },
+    // handleCurrentChange() {
+    //   this.$store.dispatch("product/getFrontendProduct", this.currentPage);
+    // },
   },
   created() {
     this.productList();
@@ -580,6 +481,20 @@ export default {
   computed: {
     products() {
       return this.$store.getters["product/productList"];
+    },
+    meta() {
+      return {
+        current_page: this.products.current_page,
+        last_page: this.products.last_page,
+        from: this.products.from,
+        to: this.products.to,
+        per_page: this.products.per_page,
+        total: this.products.total,
+        path: this.products.path,
+      };
+    },
+    set() {
+      return (this.pagination = this.meta);
     },
     user() {
       return this.$store.getters["user/getUser"];
@@ -591,5 +506,9 @@ export default {
 <style scoped>
 .el-pagination {
   background: aqua;
+}
+.form-control {
+  width: 15% !important;
+  height: 31px !important;
 }
 </style>

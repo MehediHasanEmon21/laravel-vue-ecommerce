@@ -28,6 +28,7 @@ Route::get('user-login', 'HomeController@index')->name('login');
 
 //product route
 Route::get('/product-list', 'ProductController@getFronendProduct');
+Route::get('/home-products', 'ProductController@getHomeProduct');
 Route::get('/product-sidebar-info', 'ProductController@getProductSideBarInfo');
 Route::get('/product-filter/{data}', 'ProductController@productFilter');
 
@@ -38,6 +39,7 @@ Route::group(['prefix' => 'cart'], function () {
     Route::get('/cart-products', 'CartController@allCart');
     Route::get('/remove-cart/{id}', 'CartController@remove_cart');
     Route::post('/cart-update', 'CartController@update_cart');
+    Route::post('/cart-product-add-modal', 'CartController@addCartModal');
 });
 
 Route::post('checkout', 'OrderController@checkout');

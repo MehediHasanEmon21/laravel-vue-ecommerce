@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('comment')->nullable();
-            $table->string('shipping_address');
+            $table->text('shipping_address');
             $table->float('discount', 8, 2)->nullable();
             $table->string('status')->default('pending');
             $table->string('payment_type');

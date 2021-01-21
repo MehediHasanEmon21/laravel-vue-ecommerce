@@ -2,7 +2,7 @@
   <div id="public_master">
     <!-- header section start -->
     <public-header></public-header>
-    <public-bread-crum></public-bread-crum>
+    <public-bread-crum v-if="$route.name != 'Home'"></public-bread-crum>
     <!-- header section end -->
     <!-- slider-section-start -->
     <router-view></router-view>

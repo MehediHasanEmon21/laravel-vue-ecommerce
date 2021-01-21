@@ -40,8 +40,11 @@
                       <div class="plus-minus">
                         <a class="dec qtybutton">-</a>
                         <input
+                          title="Press Enter To Update Quantity"
                           type="text"
-                          @keypress.enter.prevent="updateCart(product.id,product.quantity)"
+                          @keypress.enter.prevent="
+                            updateCart(product.id, product.quantity)
+                          "
                           v-model="product.quantity"
                           name="qtybutton"
                           class="plus-minus-box"
@@ -54,7 +57,11 @@
                     <strong>${{ product.price * product.quantity }}</strong>
                   </td>
                   <td>
-                    <i @click.prevent="removeCart(product.id)" class="mdi mdi-close" title="Remove this product"></i>
+                    <i
+                      @click.prevent="removeCart(product.id)"
+                      class="mdi mdi-close"
+                      title="Remove this product"
+                    ></i>
                   </td>
                 </tr>
               </tbody>
@@ -63,26 +70,7 @@
         </div>
       </div>
       <div class="row margin-top">
-        <div class="col-sm-6">
-          <div class="single-cart-form padding60">
-            <div class="log-title">
-              <h3><strong>coupon discount</strong></h3>
-            </div>
-            <div class="cart-form-text custom-input">
-              <p>Enter your coupon code if you have one!</p>
-              <form action="mail.php" method="post">
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Enter your code here..."
-                />
-                <div class="submit-text coupon">
-                  <button type="submit">apply coupon</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <div class="col-sm-3"></div>
         <div class="col-sm-6">
           <div class="single-cart-form padding60">
             <div class="log-title">
@@ -114,6 +102,7 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-3"></div>
       </div>
     </div>
   </section>
@@ -135,33 +124,34 @@ export default {
     productList() {
       this.$store.dispatch("cart/productList");
     },
-    removeCart(id){
-        axios.get('/cart/remove-cart/'+id)
+    removeCart(id) {
+      axios
+        .get("/cart/remove-cart/" + id)
         .then((result) => {
-            this.productList();
-            this.$message({
+          this.productList();
+          this.$message({
             message: "Cart Product Remove Successfully",
             type: "success",
             center: false,
-            });
-
-        }).catch((err) => {
-            console.log(err)
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
-    updateCart(id,qty){
-        axios.post('/cart/cart-update',{id: id, qty: qty})
+    updateCart(id, qty) {
+      axios
+        .post("/cart/cart-update", { id: id, qty: qty })
         .then((result) => {
-            this.productList();
-            this.$message({
+          this.productList();
+          this.$message({
             message: "Cart Product Update Successfully",
             type: "success",
             center: false,
-            });
-        }).catch((err) => {
-
-        });
-    }
+          });
+        })
+        .catch((err) => {});
+    },
   },
   created() {
     this.productList();

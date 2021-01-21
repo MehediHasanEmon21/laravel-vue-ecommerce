@@ -176,6 +176,28 @@ class ProductController extends Controller
         return $this->index(8);
     }
 
+    public function getHomeProduct()
+    {
+        $r_p_one = Product::inRandomOrder()->first();
+        $r_p_two = Product::inRandomOrder()->first();
+        $r_p_three = Product::inRandomOrder()->first();
+        $mid_random = Product::inRandomOrder()->first();
+        $feature_products = Product::orderBy('id', 'DESC')->limit(8)->get();
+        foreach ($feature_products as $key => $fp) {
+            $fp_id[] = $fp->id;
+        }
+        $new_arival = Product::orderBy('id', 'DESC')->whereNotIn('id', $fp_id)->limit(8)->get();
+        return response()->json([
+            'random_one' => $r_p_one,
+            'random_two' => $r_p_two,
+            'random_three' => $r_p_three,
+            'mid_random' => $mid_random,
+            'feature_products' => $feature_products,
+            'new_arival' => $new_arival,
+
+        ], 200);
+    }
+
     public function getProductSideBarInfo()
     {
 

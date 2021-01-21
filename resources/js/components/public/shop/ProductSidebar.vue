@@ -9,12 +9,22 @@
       </div>
       <div class="categories left-right-p">
         <ul id="accordion" class="panel-group clearfix">
-          <li class="panel" v-for="category in sidebars.categories" :key="category.id">
-            <div data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
+          <li
+            class="panel"
+            v-for="category in sidebars.categories"
+            :key="category.id"
+          >
+            <div
+              data-toggle="collapse"
+              data-parent="#accordion"
+              data-target="#collapse1"
+            >
               <div
                 class="medium-a"
-                @click.prevent="ProductFilter(category.id,'category_id')"
-              >{{category.name}}</div>
+                @click.prevent="ProductFilter(category.id, 'category_id')"
+              >
+                {{ category.name }}
+              </div>
             </div>
           </li>
         </ul>
@@ -31,7 +41,7 @@
           </label>
           <div class="block" v-if="sidebars.price">
             <el-slider
-              @change="ProductFilter('','price')"
+              @change="ProductFilter('', 'price')"
               v-model="value"
               range
               :min="sidebars.price.min_price"
@@ -50,11 +60,12 @@
       </div>
       <div class="size-select clearfix">
         <a
-          v-for="(size,index) in jsonData.size"
+          v-for="(size, index) in jsonData.size"
           :key="index"
           href="#"
-          @click.prevent="ProductFilter(size.value,'size')"
-        >{{ size.value }}</a>
+          @click.prevent="ProductFilter(size.value, 'size')"
+          >{{ size.value }}</a
+        >
       </div>
     </div>
     <div class="s-side-text">
@@ -66,11 +77,11 @@
       </div>
       <div class="color-select clearfix">
         <span
-          v-for="(color,index) in jsonData.color"
+          v-for="(color, index) in jsonData.color"
           :key="index"
           :style="`background: ${color.value}`"
           :title="color.label"
-          @click.prevent="ProductFilter(color.value.substring(1),'color')"
+          @click.prevent="ProductFilter(color.value.substring(1), 'color')"
         ></span>
       </div>
     </div>
@@ -83,27 +94,16 @@
       </div>
       <div class="brands-select clearfix">
         <ul>
-          <li v-for="(chunk,index) in brands" :key="index">
+          <li v-for="(chunk, index) in brands" :key="index">
             <a
               href="#"
-              @click.prevent="ProductFilter(brand.id,'brand_id')"
+              @click.prevent="ProductFilter(brand.id, 'brand_id')"
               v-for="brand in chunk"
               :key="brand.id"
-            >{{brand.name}}</a>
+              >{{ brand.name }}</a
+            >
           </li>
         </ul>
-      </div>
-    </div>
-    <div class="s-side-text">
-      <div class="banner clearfix">
-        <a href="#">
-          <img src="/assets/public/img/products/banner.jpg" alt />
-        </a>
-        <div class="banner-text">
-          <h2>best</h2>
-          <br />
-          <h2 class="banner-brand">brand</h2>
-        </div>
       </div>
     </div>
   </div>

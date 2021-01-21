@@ -30,6 +30,7 @@ export const product = {
                 });
 
         },
+
         deleteProduct(context, payload) {
             Axios.delete('/admin/product/' + payload.id)
                 .then((result) => {
@@ -50,6 +51,16 @@ export const product = {
             Axios.get('/product-list?page=' + payload)
                 .then((result) => {
                     context.commit('productList', result.data.products)
+                }).catch((err) => {
+
+                });
+
+        },
+        getHomeProduct(context) {
+
+            Axios.get('/home-products')
+                .then((result) => {
+                    context.commit('productList', result.data)
                 }).catch((err) => {
 
                 });
